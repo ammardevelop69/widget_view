@@ -11,7 +11,22 @@
   <h1>Page with Chat Widget</h1>
   <p>The chat widget should load in the corner. Configure or open it via the widget UI.</p>
 
-<!-- This site is converting visitors into subscribers and customers with https://respond.io --><script id="respondio__widget" src="https://cdn.respond.io/webchat/widget/widget.js?cId=ede4d8511658df72b2d354b655d45ec"></script><!-- https://respond.io -->
-</body>
+<!-- Begin Kogents Chat Widget -->
+<script type="text/javascript">
+  window.KogentsChat ||
+    (function (d, s, id) {
+      var w = (window.KogentsChat = function (c) {
+        w._.push(c);
+      });
+      w._ = [];
+      var e = d.createElement(s);
+      e.async = true;
+      e.id = id;
+      e.src = "https://api.kogents.com/widget/embed.js?key=5fede336-242a-4ce7-902d-ad370a5a4eab&chatbotId=8e43542a-8472-499e-91fd-682266f48138";
+      var t = d.getElementsByTagName(s)[0];
+      t.parentNode.insertBefore(e, t);
+    })(document, "script", "kogents-chat-widget");
+</script>
+<!-- End Kogents Chat Widget --></body>
 
 </html>
