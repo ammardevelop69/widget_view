@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website 1 Booking</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #f5f7f4;
+      color: #1f2933;
+      font-family: Arial, sans-serif;
+    }
+
+    .cal-inline {
+      width: 100%;
+      height: 720px;
+      min-height: 720px;
+      overflow: auto;
+      background: #ffffff;
+      border: 1px solid #d7e3d6;
+      border-radius: 8px;
+    }
+
+    .cal-status {
+      color: #6b7280;
+      font-size: 14px;
+    }
+
+    .cal-fallback {
+      display: none;
+      margin-top: 12px;
+      padding: 14px 16px;
+      border: 1px solid #d7e3d6;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .cal-fallback.is-visible {
+      display: block;
+    }
+
+    .cal-fallback a {
+      color: #166534;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Website 1 Booking</h1>
+  <p><a href="../">Back to routes</a></p>
+
+  <div id="kogents-cal-booking-site-1" class="cal-inline"></div>
+  <p id="kogents-cal-status-site-1" class="cal-status">
+    Loading calendar... If it stays blank, open the
+    <a href="https://cal.com/abdullah-mansoor-gjctvg" target="_blank" rel="noopener">direct Cal.com link</a>.
+  </p>
+  <div id="kogents-cal-fallback-site-1" class="cal-fallback">
+    Cal.com embed script is not loading in this browser/session. You can still test the booking flow through the
+    <a href="https://cal.com/abdullah-mansoor-gjctvg" target="_blank" rel="noopener">direct Cal.com booking page</a>.
+  </div>
+  <script type="text/javascript">
+    function showCalFallbackSite1(message) {
+      var status = document.getElementById("kogents-cal-status-site-1");
+      var fallback = document.getElementById("kogents-cal-fallback-site-1");
+      if (status && message) status.textContent = message;
+      if (fallback) fallback.className = "cal-fallback is-visible";
+    }
+
+    (function (C, A, L) {
+      var p = function (a, ar) { a.q.push(ar); };
+      var d = C.document;
+      C.Cal = C.Cal || function () {
+        var cal = C.Cal;
+        var ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          var script = d.createElement("script");
+          script.src = A;
+          script.async = true;
+          script.onerror = function () {
+            showCalFallbackSite1("Cal.com embed script was blocked by the browser or Cloudflare.");
+          };
+          d.head.appendChild(script);
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          var api = function () { p(api, arguments); };
+          var namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else {
+            p(cal, ar);
+          }
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    var calReadyTimerSite1 = window.setTimeout(function () {
+      showCalFallbackSite1("Cal.com calendar did not finish loading. This usually happens on local URLs when Cloudflare challenges the embed script.");
+    }, 10000);
+
+    Cal("init", "kogentsSite1", { origin: "https://cal.com" });
+    Cal.ns["kogentsSite1"]("inline", {
+      elementOrSelector: "#kogents-cal-booking-site-1",
+      calLink: "abdullah-mansoor-gjctvg",
+      config: {
+        layout: "month_view",
+        "metadata[sourceWebsite]": "purevital-site-1",
+        "metadata[workspaceId]": "a9a4067c-ff6d-44b3-8418-0810b0e8f1b2"
+      }
+    });
+    Cal.ns["kogentsSite1"]("ui", {
+      theme: "light",
+      styles: { branding: { brandColor: "#56C477" } },
+      hideEventTypeDetails: false,
+      layout: "month_view"
+    });
+    Cal.ns["kogentsSite1"]("on", {
+      action: "linkReady",
+      callback: function () {
+        var status = document.getElementById("kogents-cal-status-site-1");
+        var fallback = document.getElementById("kogents-cal-fallback-site-1");
+        window.clearTimeout(calReadyTimerSite1);
+        if (status) status.textContent = "";
+        if (fallback) fallback.className = "cal-fallback";
+      }
+    });
+    Cal.ns["kogentsSite1"]("on", {
+      action: "linkFailed",
+      callback: function (event) {
+        var status = document.getElementById("kogents-cal-status-site-1");
+        if (status) {
+          status.textContent = "Calendar link failed to load. Check the Cal.com calLink/event slug.";
+        }
+        showCalFallbackSite1("Calendar link failed to load. Check the Cal.com calLink/event slug.");
+        console.error("Cal.com link failed", event.detail);
+      }
+    });
+  </script>
+
+<!-- Begin Kogents Chat Widget -->
+<script type="text/javascript">
+  window.KogentsChat ||
+    (function (d, s, id) {
+      var w = (window.KogentsChat = function (c) {
+        w._.push(c);
+      });
+      w._ = [];
+      var e = d.createElement(s);
+      e.async = true;
+      e.id = id;
+      e.src = "https://api-staging.kogents.com/widget/embed.js?key=a9a4067c-ff6d-44b3-8418-0810b0e8f1b2&chatbotId=e69ccde3-625c-41b8-9023-c915c78a5150";
+      var t = d.getElementsByTagName(s)[0];
+      t.parentNode.insertBefore(e, t);
+    })(document, "script", "kogents-chat-widget");
+</script>
+<!-- End Kogents Chat Widget -->
+</body>
+
+</html>
